@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+
+    <springProperty scope="context" name="app.name" source="spring.application.name" defaultValue="default"/>
+    <springProperty scope="context" name="app.active" source="spring.profiles.active" defaultValue="default"/>
+    <property name="LOG_APP_NAME" value="${LOG_APP_NAME:-${app.name}}"/>
+    <property name="LOG_APP_ACTIVE" value="${LOG_APP_ACTIVE:-${app.active}}"/>
+
+    <property name="LOG_BACKUP_PATH" value="${LOG_BACKUP_PATH:-/backup}"/>
+
+    <property name="TIME_PATTERN"
+              value="${TIME_PATTERN:-%date{HH:mm:ss.SSS} [%-5level] [%thread] %X{preLog} %logger:%line - %msg%n}"/>
+    <property name="DATETIME_PATTERN"
+              value="${DATETIME_PATTERN:-%date{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %X{preLog} %logger:%line - %msg%n}"/>
+
+    <!--控制台日志输出-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${TIME_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <springProfile name="dev">
+        <logger name="org.apache.zookeeper" level="OFF"/>
+        <logger name="org.apache.curator" level="OFF"/>
+        <logger name="com.netflix.discovery" level="OFF"/>
+        <logger name="org.apache.http" level="OFF"/>
+        <logger name="com.aliyun.opensearch.sdk.dependencies" level="INFO"/>
+        <root level="DEBUG">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+    <springProfile name="!dev">
+        <logger name="org.apache.zookeeper" level="OFF"/>
+        <logger name="org.apache.curator" level="OFF"/>
+        <logger name="com.netflix.discovery" level="OFF"/>
+        <logger name="org.apache.http" level="OFF"/>
+        <logger name="com.aliyun.opensearch.sdk.dependencies" level="INFO"/>
+        <root level="DEBUG">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+</configuration>

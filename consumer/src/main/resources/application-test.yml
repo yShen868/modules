@@ -1,0 +1,7 @@
+server:
+  port: 8082
+
+
+consumer:
+  config:
+    name: 测试

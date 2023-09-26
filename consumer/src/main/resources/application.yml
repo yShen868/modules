@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+
+#consumer:
+#  config:
+#    name: 郑悦恺
+#
+
+
+spring:
+  profiles:
+    active: @profiles.active@
+  application:
+    name: demoModules

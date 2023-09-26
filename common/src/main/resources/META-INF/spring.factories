@@ -1,0 +1,2 @@
+#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+#com.common.common.config.WebAutoConfiguration  2.7 ?? spring???  ?????
